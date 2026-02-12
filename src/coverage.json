@@ -1,0 +1,271 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-11T16:02:52.083Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 9,
+    "implemented": 7,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Implement user authentication using Internet Identity and persist a user profile record on first login with an initial points balance of 100 points.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Auth/LoginButton.tsx",
+          "frontend/src/components/Auth/ProfileSetupDialog.tsx",
+          "frontend/src/hooks/useCurrentUser.ts",
+          "frontend/src/main.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Auth/LoginButton.tsx",
+          "frontend/src/components/Auth/ProfileSetupDialog.tsx",
+          "frontend/src/hooks/useCurrentUser.ts",
+          "frontend/src/main.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Create backend data models and stable storage for users, videos, and watch history, including fields needed for: user points balance, video metadata (title, description, category, creator), and an append-only record of which user watched which video and when.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Implement the points transfer rule when watching a video: watching deducts 10 points from the learner and adds 10 points to the video creator; block watching if the learner has fewer than 10 points; record the watch event in watch history.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Implement video upload functionality: allow authenticated users to create a video lesson entry with title, description, category, and the video content; ensure the video can be played back from the Home feed and video detail view.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/UploadPage.tsx",
+          "frontend/src/hooks/useVideos.ts",
+          "frontend/src/lib/blob.ts",
+          "frontend/src/pages/VideoDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/UploadPage.tsx",
+          "frontend/src/lib/blob.ts",
+          "frontend/src/pages/VideoDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Build the Home page with a card-based video layout including search and category filtering across uploaded videos; include a simple navigation bar with routes: Home, Upload, Profile.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/Video/VideoCard.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/Video/VideoCard.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Create a Profile/Dashboard page that displays: user profile, current points balance, the user’s uploaded videos, and the user’s watched history.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/hooks/useProfile.ts",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Ensure the watch experience enforces points rules in the UI: disable/guard the watch action when the user has fewer than 10 points, and show clear English feedback for insufficient points; on successful watch, update displayed balances and creator info without full refresh.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Video/WatchButton.tsx",
+          "frontend/src/pages/VideoDetailPage.tsx",
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/hooks/useVideos.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Video/WatchButton.tsx",
+          "frontend/src/pages/VideoDetailPage.tsx",
+          "frontend/src/pages/ProfilePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Apply a clean, modern, mobile-friendly visual design with a coherent theme (colors, typography, spacing) and consistent components across pages; avoid using blue/purple as the primary brand palette.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/Layout/AppLayout.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/UploadPage.tsx",
+          "frontend/src/pages/ProfilePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/Layout/AppLayout.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/pages/UploadPage.tsx",
+          "frontend/src/pages/ProfilePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Generate and include minimal static brand assets for the app (logo + favicon) and render them in the app shell/navigation.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/skillswap-logo.dim_512x512.png",
+          "frontend/public/assets/generated/skillswap-favicon.dim_128x128.png",
+          "frontend/index.html",
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/skillswap-logo.dim_512x512.png",
+          "frontend/public/assets/generated/skillswap-favicon.dim_128x128.png",
+          "frontend/index.html",
+          "frontend/src/components/NavBar.tsx",
+          "frontend/src/App.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/blob-storage/Mixin.mo",
+    "backend/blob-storage/Storage.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/package.json",
+    "build-template/pnpm-lock.yaml",
+    "build-template/pnpm-workspace.yaml",
+    "build-template/scripts/prune-unused-images.js",
+    "build-template/scripts/resize-images.js",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/backend/system-idl/aaaaa-aa.did",
+    "build-template/src/frontend/canister.yaml",
+    "build-template/src/frontend/components.json",
+    "build-template/src/frontend/env.json",
+    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
+    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
+    "build-template/src/frontend/eslint.config.js",
+    "build-template/src/frontend/package.json",
+    "build-template/src/frontend/postcss.config.js",
+    "build-template/src/frontend/src/components/ui/accordion.tsx",
+    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
+    "build-template/src/frontend/src/components/ui/alert.tsx",
+    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
+    "build-template/src/frontend/src/components/ui/avatar.tsx",
+    "build-template/src/frontend/src/components/ui/badge.tsx",
+    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
+    "build-template/src/frontend/src/components/ui/button.tsx",
+    "build-template/src/frontend/src/components/ui/calendar.tsx",
+    "build-template/src/frontend/src/components/ui/card.tsx",
+    "build-template/src/frontend/src/components/ui/carousel.tsx",
+    "build-template/src/frontend/src/components/ui/chart.tsx",
+    "build-template/src/frontend/src/components/ui/checkbox.tsx",
+    "build-template/src/frontend/src/components/ui/collapsible.tsx",
+    "build-template/src/frontend/src/components/ui/command.tsx",
+    "build-template/src/frontend/src/components/ui/context-menu.tsx",
+    "build-template/src/frontend/src/components/ui/dialog.tsx",
+    "build-template/src/frontend/src/components/ui/drawer.tsx",
+    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
+    "build-template/src/frontend/src/components/ui/form.tsx",
+    "build-template/src/frontend/src/components/ui/hover-card.tsx",
+    "build-template/src/frontend/src/components/ui/input-otp.tsx",
+    "build-template/src/frontend/src/components/ui/input.tsx",
+    "build-template/src/frontend/src/components/ui/label.tsx",
+    "build-template/src/frontend/src/components/ui/menubar.tsx",
+    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
+    "build-template/src/frontend/src/components/ui/pagination.tsx",
+    "build-template/src/frontend/src/components/ui/popover.tsx",
+    "build-template/src/frontend/src/components/ui/progress.tsx",
+    "build-template/src/frontend/src/components/ui/radio-group.tsx",
+    "build-template/src/frontend/src/components/ui/resizable.tsx",
+    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
+    "build-template/src/frontend/src/components/ui/select.tsx",
+    "build-template/src/frontend/src/components/ui/separator.tsx",
+    "build-template/src/frontend/src/components/ui/sheet.tsx",
+    "build-template/src/frontend/src/components/ui/sidebar.tsx",
+    "build-template/src/frontend/src/components/ui/skeleton.tsx",
+    "build-template/src/frontend/src/components/ui/slider.tsx",
+    "build-template/src/frontend/src/components/ui/sonner.tsx",
+    "build-template/src/frontend/src/components/ui/switch.tsx",
+    "build-template/src/frontend/src/components/ui/table.tsx",
+    "build-template/src/frontend/src/components/ui/tabs.tsx",
+    "build-template/src/frontend/src/components/ui/textarea.tsx",
+    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
+    "build-template/src/frontend/src/components/ui/toggle.tsx",
+    "build-template/src/frontend/src/components/ui/tooltip.tsx",
+    "build-template/src/frontend/src/hooks/use-mobile.tsx",
+    "build-template/src/frontend/src/lib/utils.ts",
+    "build-template/src/frontend/tsconfig.json",
+    "build-template/src/frontend/vite.config.js",
+    "build-template/tsconfig.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/assets/generated/skillswap-favicon.dim_128x128.png",
+    "frontend/public/assets/generated/skillswap-logo.dim_512x512.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/Auth/LoginButton.tsx",
+    "frontend/src/components/Auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/Layout/AppLayout.tsx",
+    "frontend/src/components/NavBar.tsx",
+    "frontend/src/components/Video/VideoCard.tsx",
+    "frontend/src/components/Video/WatchButton.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useCurrentUser.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/blob.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ProfilePage.tsx",
+    "frontend/src/pages/UploadPage.tsx",
+    "frontend/src/pages/VideoDetailPage.tsx",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/StorageClient.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

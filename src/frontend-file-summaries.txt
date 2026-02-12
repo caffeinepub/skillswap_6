@@ -1,0 +1,19 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, layout with navbar and footer, and routes for Home, Upload, Profile, and Video Detail pages with ThemeProvider wrapper.",
+  "frontend/src/components/NavBar.tsx": "Responsive navigation bar with logo, navigation links (Home/Upload/Profile), points display, login button, and mobile menu toggle.",
+  "frontend/src/components/Auth/LoginButton.tsx": "Authentication button component that handles Internet Identity login/logout with loading states and query cache clearing.",
+  "frontend/src/components/Auth/ProfileSetupDialog.tsx": "Modal dialog for first-time user profile setup that appears after authentication when no profile exists, creates user with 100 initial points.",
+  "frontend/src/components/Video/VideoCard.tsx": "Reusable video card component displaying title, description, category badge, creator info, and watch button with navigation to detail page.",
+  "frontend/src/components/Video/WatchButton.tsx": "Watch action button with points validation, self-watch prevention, insufficient points alerts, and success handling with query invalidation.",
+  "frontend/src/components/Layout/AppLayout.tsx": "Shared layout wrapper component providing consistent container, padding, and max-width constraints across pages.",
+  "frontend/src/pages/HomePage.tsx": "Home page with video grid, search input, category filter, and responsive card layout showing all available videos.",
+  "frontend/src/pages/UploadPage.tsx": "Video upload page with form validation for title/description/category/file, upload progress tracking, and success state with navigation.",
+  "frontend/src/pages/ProfilePage.tsx": "Profile dashboard showing user info, points balance, tabbed interface for uploaded videos and watch history with formatted timestamps.",
+  "frontend/src/pages/VideoDetailPage.tsx": "Video detail page with HTML5 video player, video metadata, creator info, and watch action button with success state tracking.",
+  "frontend/src/hooks/useCurrentUser.ts": "React Query hooks for fetching current user profile with proper actor dependency handling and loading states.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including videos, watch history, profile videos, upload, and watch mutations with toast notifications.",
+  "frontend/src/lib/blob.ts": "Helper utilities for converting File objects to ExternalBlob and getting blob URLs for video playback.",
+  "frontend/src/index.css": "Global styles with OKLCH color system using emerald/teal theme (avoiding blue/purple) for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom color tokens, Inter font family, and extended theme utilities for consistent design system.",
+  "frontend/index.html": "HTML entry point with favicon link and SkillSwap title."
+}

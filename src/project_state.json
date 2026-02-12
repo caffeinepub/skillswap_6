@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build SkillSwap, a modern responsive skill-sharing web app where users authenticate via Google, earn/spend points to watch short video lessons, and upload/manage videos with search/filter and dashboards backed by a structured database.",
+  "architectural_notes": [
+    "Use a structured database schema for users, videos, and watch history with transactional/atomic updates for point transfers on video watch."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Modern wordmark logo reading “SkillSwap” with a simple swap/loop motif (skillswap-logo.dim_512x512.png)\n- Minimal monochrome favicon icon with swap/loop motif (skillswap-favicon.dim_128x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-user-authentication-using-internet-identity-and-persist-a-user-profile-record-on-first-login-with-an-initial-points-balance-of-100-points",
+      "title": "Implement user authentication using Internet Identity and persist a user profile record on first login with an initial points balance of 100 points.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-video-upload-functionality-allow-authenticated-users-to-create-a-video-lesson-entry-with-title-description-category-and-the-video-content-ensure-the-video-can-be-played-back-from-the-home-feed-and-video-detail-view",
+      "title": "Implement video upload functionality: allow authenticated users to create a video lesson entry with title, description, category, and the video content; ensure the video can be played back from the Home feed and video detail view.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-home-page-with-a-card-based-video-layout-including-search-and-category-filtering-across-uploaded-videos-include-a-simple-navigation-bar-with-routes-home-upload-profile",
+      "title": "Build the Home page with a card-based video layout including search and category filtering across uploaded videos; include a simple navigation bar with routes: Home, Upload, Profile.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-profile-dashboard-page-that-displays-user-profile-current-points-balance-the-user-s-uploaded-videos-and-the-user-s-watched-history",
+      "title": "Create a Profile/Dashboard page that displays: user profile, current points balance, the user’s uploaded videos, and the user’s watched history.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-watch-experience-enforces-points-rules-in-the-ui-disable-guard-the-watch-action-when-the-user-has-fewer-than-10-points-and-show-clear-english-feedback-for-insufficient-points-on-successful-watch-update-displayed-balances-and-creator-info-without-full-refresh",
+      "title": "Ensure the watch experience enforces points rules in the UI: disable/guard the watch action when the user has fewer than 10 points, and show clear English feedback for insufficient points; on successful watch, update displayed balances and creator info without full refresh.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-clean-modern-mobile-friendly-visual-design-with-a-coherent-theme-colors-typography-spacing-and-consistent-components-across-pages-avoid-using-blue-purple-as-the-primary-brand-palette",
+      "title": "Apply a clean, modern, mobile-friendly visual design with a coherent theme (colors, typography, spacing) and consistent components across pages; avoid using blue/purple as the primary brand palette.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-include-minimal-static-brand-assets-for-the-app-logo-favicon-and-render-them-in-the-app-shell-navigation",
+      "title": "Generate and include minimal static brand assets for the app (logo + favicon) and render them in the app shell/navigation.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Google (Gmail) authentication for sign up/login and user profiles",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Points system: start new users at 100 points; watching a video costs 10 points and transfers 10 points to the creator; block watching if <10 points",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Video upload: creators can upload short skill videos with title, description, and category; display creator name and points earned",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Dashboard/Profile: show user profile, current points balance, uploaded videos, and watched history",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Home UI: clean modern mobile-friendly design with card-based video layout, search, category filter, and navbar (Home, Upload, Profile)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Database/data layer: store users, points, videos, and watch history; automatically update points when a video is watched",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Responsive behavior and smooth UX on desktop and mobile browsers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Create backend data models and stable storage for users, videos, and watch history, including fields needed for: user points balance, video metadata (title, description, category, creator), and an append-only record of which user watched which video and when.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Implement the points transfer rule when watching a video: watching deducts 10 points from the learner and adds 10 points to the video creator; block watching if the learner has fewer than 10 points; record the watch event in watch history.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "SkillSwap",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

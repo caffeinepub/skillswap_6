@@ -1,0 +1,165 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-user-authentication-using-internet-identity-and-persist-a-user-profile-record-on-first-login-with-an-initial-points-balance-of-100-points",
+      "featureTitle": "Implement user authentication using Internet Identity and persist a user profile record on first login with an initial points balance of 100 points.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Auth/LoginButton.tsx",
+        "frontend/src/components/Auth/ProfileSetupDialog.tsx",
+        "frontend/src/hooks/useCurrentUser.ts",
+        "frontend/src/main.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-video-upload-functionality-allow-authenticated-users-to-create-a-video-lesson-entry-with-title-description-category-and-the-video-content-ensure-the-video-can-be-played-back-from-the-home-feed-and-video-detail-view",
+      "featureTitle": "Implement video upload functionality: allow authenticated users to create a video lesson entry with title, description, category, and the video content; ensure the video can be played back from the Home feed and video detail view.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/lib/blob.ts",
+        "frontend/src/pages/UploadPage.tsx",
+        "frontend/src/pages/VideoDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-home-page-with-a-card-based-video-layout-including-search-and-category-filtering-across-uploaded-videos-include-a-simple-navigation-bar-with-routes-home-upload-profile",
+      "featureTitle": "Build the Home page with a card-based video layout including search and category filtering across uploaded videos; include a simple navigation bar with routes: Home, Upload, Profile.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/NavBar.tsx",
+        "frontend/src/components/Video/VideoCard.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-profile-dashboard-page-that-displays-user-profile-current-points-balance-the-user-s-uploaded-videos-and-the-user-s-watched-history",
+      "featureTitle": "Create a Profile/Dashboard page that displays: user profile, current points balance, the user’s uploaded videos, and the user’s watched history.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-watch-experience-enforces-points-rules-in-the-ui-disable-guard-the-watch-action-when-the-user-has-fewer-than-10-points-and-show-clear-english-feedback-for-insufficient-points-on-successful-watch-update-displayed-balances-and-creator-info-without-full-refresh",
+      "featureTitle": "Ensure the watch experience enforces points rules in the UI: disable/guard the watch action when the user has fewer than 10 points, and show clear English feedback for insufficient points; on successful watch, update displayed balances and creator info without full refresh.",
+      "files": [
+        "frontend/src/components/Video/WatchButton.tsx",
+        "frontend/src/pages/ProfilePage.tsx",
+        "frontend/src/pages/VideoDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-clean-modern-mobile-friendly-visual-design-with-a-coherent-theme-colors-typography-spacing-and-consistent-components-across-pages-avoid-using-blue-purple-as-the-primary-brand-palette",
+      "featureTitle": "Apply a clean, modern, mobile-friendly visual design with a coherent theme (colors, typography, spacing) and consistent components across pages; avoid using blue/purple as the primary brand palette.",
+      "files": [
+        "frontend/src/components/Layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/ProfilePage.tsx",
+        "frontend/src/pages/UploadPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-and-include-minimal-static-brand-assets-for-the-app-logo-favicon-and-render-them-in-the-app-shell-navigation",
+      "featureTitle": "Generate and include minimal static brand assets for the app (logo + favicon) and render them in the app shell/navigation.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/App.tsx",
+        "frontend/src/components/NavBar.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

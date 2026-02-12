@@ -1,0 +1,250 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "SkillSwap frontend: auth, video feed/upload/watch, profile, theming, and brand assets",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add Internet Identity sign-in/out UI and first-login profile setup flow that persists a user profile with the backend-provided initial 100 points.",
+      "acceptanceCriteria": [
+        "Users can sign in/out with Internet Identity from the UI.",
+        "On a user’s first successful login, a user record is created with pointsBalance = 100.",
+        "On subsequent logins, the existing user record is loaded and points are not reset.",
+        "User-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create app shell with routing and authentication-aware layout. Use the authorization component patterns (Internet Identity via useInternetIdentity + actor via useActor) to drive signed-in/out states and to gate authenticated pages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add a Login/Logout button using the authorization component guidance (useInternetIdentity). Ensure logout clears cached app data via the React Query client. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Implement first-login profile setup dialog that appears only when authenticated and getCallerUserProfile() returns null (avoid modal flash per authorization component guidance). Submit name to backend (createUserProfile or saveCallerUserProfile as appropriate). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUser.ts",
+          "operation": "create",
+          "description": "Create React Query hooks to load current user role/profile (getCallerUserRole, getCallerUserProfile/getProfile) and expose derived booleans (isAuthenticated, isGuest) for UI gating. Handle authorization failures with user-friendly English messages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Ensure QueryClientProvider and InternetIdentityProvider remain wired, and (if needed) wrap App with any router provider used by the app shell so auth state changes re-render routes cleanly. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build authenticated video upload UI (metadata + video file) and ensure uploaded videos play in Home and Video Detail views.",
+      "acceptanceCriteria": [
+        "Upload page requires authentication; unauthenticated users are prompted to sign in.",
+        "Upload form validates required fields (title, description, category, and a selected video file).",
+        "After upload, the new video appears in the Home feed without requiring a page reload.",
+        "A user can open a video and play it in the browser.",
+        "Each video displays creator name/identifier and the creator’s points earned (or current points, as specified in UI copy) in the UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/UploadPage.tsx",
+          "operation": "create",
+          "description": "Create Upload page gated by authentication. Build a form for title/description/category and a video file picker with required-field validation and English helper/error text. On submit, upload via backend uploadVideo and invalidate/refetch the Home feed query so the new card appears without full reload. Use shadcn-ui form/input/button components for consistent UI; do not edit immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useVideos.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for getAllVideos(), getVideo(id), and uploadVideo(). Ensure successful uploads invalidate the list query and handle backend errors as friendly English messages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/blob.ts",
+          "operation": "create",
+          "description": "Add helper to convert an HTML file input into blob-storage ExternalBlob (fromBytes) and optionally wire upload progress (withUploadProgress) for the UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/VideoDetailPage.tsx",
+          "operation": "create",
+          "description": "Create a video detail page that fetches video metadata and renders an HTML5 video player using the blob-storage ExternalBlob direct URL (getDirectURL) for playback. Show creator identifier/name and points info per UI copy. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Upload and Video Detail pages into routing/navigation so they are reachable from the navbar and video cards. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement responsive Home page with card-based video layout, search, category filtering, and a navbar with Home/Upload/Profile routes.",
+      "acceptanceCriteria": [
+        "Navigation bar is visible and usable on desktop and mobile, and routes correctly to Home/Upload/Profile.",
+        "Home shows a grid/list of video cards that adapts responsively to screen size.",
+        "Search filters videos by title and/or description.",
+        "Category filter allows selecting a category (e.g., Coding, Cooking, Design, Music) and narrows results accordingly.",
+        "Each video card shows at minimum: title, category, creator, and a clear call-to-action to watch/open the video."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/NavBar.tsx",
+          "operation": "create",
+          "description": "Create a responsive navigation bar with links to Home, Upload, Profile. Include auth controls (LoginButton) and render the logo asset. Use shadcn-ui navigation/button primitives where appropriate; do not edit immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create Home page that loads videos with a React Query hook (getAllVideos) and renders responsive cards. Add controlled search input and category select to filter by title/description and category. Each card includes an Open/Watch CTA to navigate to the video detail view. Use shadcn-ui card/input/select components; do not edit immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Video/VideoCard.tsx",
+          "operation": "create",
+          "description": "Create reusable video card component to display title, category, creator identifier/name, and CTA. Keep styling consistent with theme. Use shadcn-ui Card/Button components; do not edit immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register Home route and ensure the NavBar is visible across pages with correct route wiring for Home/Upload/Profile. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create authenticated Profile/Dashboard page showing user profile info, points balance, uploaded videos, and watched history.",
+      "acceptanceCriteria": [
+        "Profile page requires authentication; unauthenticated users are prompted to sign in.",
+        "Profile page shows current points balance prominently.",
+        "Profile page lists uploaded videos created by the signed-in user.",
+        "Profile page lists watched history entries with at least video title and watch timestamp (and optionally the cost/transfer info)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "create",
+          "description": "Create Profile page gated by authentication. Load and display current profile (name + points) prominently. Fetch and list the caller’s uploaded videos (getProfileVideos) and watch history (getWatchHistory) with readable timestamps and associated video titles (resolve titles via cached video list or per-video fetch). Use shadcn-ui table/card components; do not edit immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useProfile.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for getProfile(), getProfileVideos(userId), getWatchHistory(userId), and (if needed) getPointsBalance. Ensure queries key off the authenticated principal and handle backend authorization errors with friendly English messages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Profile route into the router and ensure navbar route works on mobile/desktop. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Enforce the 10-point watch rule in the UI with clear messaging, disable/guard watch when points are insufficient, and refresh balances/history after a successful watch.",
+      "acceptanceCriteria": [
+        "If the user has < 10 points, the watch button/action is disabled or blocked and an English message explains why.",
+        "On successful watch, the UI updates the viewer’s points balance and reflects the watch in watch history.",
+        "Errors from the backend (e.g., insufficient points) are displayed in a user-friendly English message."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Video/WatchButton.tsx",
+          "operation": "create",
+          "description": "Create a watch action component that checks current user points (from profile query) and disables/guards watching when points < 10 with a clear English explanation. Also guard/document behavior for self-watch by comparing current principal to video.creator and either block with a clear English error or allow with documented no-transfer messaging (match backend behavior). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/VideoDetailPage.tsx",
+          "operation": "modify",
+          "description": "Integrate WatchButton into the video detail view. On successful watchVideo call, invalidate/refetch relevant queries (current profile points, watch history, and any video/creator display data) so the UI updates without full refresh; display backend errors in English. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Ensure watched history updates after a watch by relying on React Query invalidation and showing refreshed history entries with timestamps. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useVideos.ts",
+          "operation": "modify",
+          "description": "Add a watchVideo mutation that triggers cache invalidation for profile points, watch history, and video queries; normalize backend errors into user-friendly English strings. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Apply a clean, modern, mobile-friendly theme with consistent styling and avoid blue/purple as the primary palette.",
+      "acceptanceCriteria": [
+        "UI is responsive across common breakpoints (mobile, tablet, desktop).",
+        "Consistent card styling, spacing, and typography across Home, Upload, and Profile.",
+        "Primary theme does not use blue/purple as the dominant palette.",
+        "All user-facing text is English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add global styling and Tailwind base layers that define CSS variables for a coherent theme (e.g., neutral/emerald or neutral/amber primary rather than blue/purple). Ensure consistent typography and spacing defaults. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust theme tokens/extended colors if needed to ensure the primary palette is not blue/purple and to support consistent card and layout styling across breakpoints. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper (container, spacing, responsive paddings) used by Home/Upload/Profile/VideoDetail to keep consistent structure and mobile-friendly design. Use shadcn-ui layout-friendly primitives (Card, Separator, etc.) without modifying immutable UI component source. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Adopt AppLayout and consistent card/grid styles to ensure responsive behavior on mobile/tablet/desktop. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/UploadPage.tsx",
+          "operation": "modify",
+          "description": "Adopt AppLayout and consistent form styling; ensure all helper/validation text is English. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Adopt AppLayout and consistent typography; ensure all labels/messages are English. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add generated brand assets (logo + favicon) and render them in the app shell/navigation.",
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
+        "The logo is visible in the navigation bar/app header and the favicon is set for the app."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/skillswap-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add generated logo asset at frontend/public/assets/generated/skillswap-logo.dim_512x512.png and ensure it is committed as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/skillswap-favicon.dim_128x128.png",
+          "operation": "create",
+          "description": "Add generated favicon asset at frontend/public/assets/generated/skillswap-favicon.dim_128x128.png and ensure it is committed as a static public asset."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Set the favicon to frontend/public/assets/generated/skillswap-favicon.dim_128x128.png and ensure the document title remains SkillSwap."
+        },
+        {
+          "path": "frontend/src/components/NavBar.tsx",
+          "operation": "modify",
+          "description": "Render the logo image from frontend/public/assets/generated/skillswap-logo.dim_512x512.png in the app header/navbar with appropriate accessible alt text. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure NavBar (with logo) is part of the app shell across routes. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

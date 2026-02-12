@@ -1,0 +1,216 @@
+{
+  "kind": "build_request",
+  "title": "SkillSwap: skill-sharing video platform with points, uploads, and profiles",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement user authentication using Internet Identity and persist a user profile record on first login with an initial points balance of 100 points.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Sign up and login using Google (Gmail).",
+          "Each new user starts with 100 points."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign in/out with Internet Identity from the UI.",
+        "On a user’s first successful login, a user record is created with pointsBalance = 100.",
+        "On subsequent logins, the existing user record is loaded and points are not reset.",
+        "User-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create backend data models and stable storage for users, videos, and watch history, including fields needed for: user points balance, video metadata (title, description, category, creator), and an append-only record of which user watched which video and when.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Store users, points, and videos in a structured database.",
+          "Show watched history"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query methods to fetch: current user profile (including points), list of videos, a specific video’s details, and current user’s watch history.",
+        "Backend exposes update methods to create a video, and to record a watch transaction.",
+        "All data persists across canister upgrades using stable storage patterns (no data loss on upgrade in normal operation)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement the points transfer rule when watching a video: watching deducts 10 points from the learner and adds 10 points to the video creator; block watching if the learner has fewer than 10 points; record the watch event in watch history.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Watching a skill video deducts 10 points from the learner.",
+          "Those 10 points are automatically added to the video creator’s account.",
+          "Users cannot watch a video if they have less than 10 points."
+        ]
+      },
+      "acceptanceCriteria": [
+        "If a user with pointsBalance >= 10 watches a video, their points decrease by 10 and the creator’s points increase by 10 in the same backend update call.",
+        "If a user has pointsBalance < 10, the watch operation is rejected and no balances change.",
+        "Each successful watch creates a watch history entry including watcher principal, video id, and timestamp.",
+        "A user cannot transfer points to themselves when watching their own video; if self-watches are allowed, balances must remain unchanged and the behavior must be consistent and documented in UI text, otherwise block self-watches with a clear English error."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement video upload functionality: allow authenticated users to create a video lesson entry with title, description, category, and the video content; ensure the video can be played back from the Home feed and video detail view.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Users can upload short skill videos with: Title, Description, Category (e.g., Coding, Cooking, Design, Music, etc.)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Upload page requires authentication; unauthenticated users are prompted to sign in.",
+        "Upload form validates required fields (title, description, category, and a selected video file).",
+        "After upload, the new video appears in the Home feed without requiring a page reload.",
+        "A user can open a video and play it in the browser.",
+        "Each video displays creator name/identifier and the creator’s points earned (or current points, as specified in UI copy) in the UI."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Build the Home page with a card-based video layout including search and category filtering across uploaded videos; include a simple navigation bar with routes: Home, Upload, Profile.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Card-based video layout",
+          "Search and category filter",
+          "Simple navigation bar (Home, Upload, Profile)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navigation bar is visible and usable on desktop and mobile, and routes correctly to Home/Upload/Profile.",
+        "Home shows a grid/list of video cards that adapts responsively to screen size.",
+        "Search filters videos by title and/or description.",
+        "Category filter allows selecting a category (e.g., Coding, Cooking, Design, Music) and narrows results accordingly.",
+        "Each video card shows at minimum: title, category, creator, and a clear call-to-action to watch/open the video."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create a Profile/Dashboard page that displays: user profile, current points balance, the user’s uploaded videos, and the user’s watched history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Dashboard\n\nDisplay user profile\n\nShow current points balance\n\nShow uploaded videos\n\nShow watched history"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile page requires authentication; unauthenticated users are prompted to sign in.",
+        "Profile page shows current points balance prominently.",
+        "Profile page lists uploaded videos created by the signed-in user.",
+        "Profile page lists watched history entries with at least video title and watch timestamp (and optionally the cost/transfer info)."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Ensure the watch experience enforces points rules in the UI: disable/guard the watch action when the user has fewer than 10 points, and show clear English feedback for insufficient points; on successful watch, update displayed balances and creator info without full refresh.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Users cannot watch a video if they have less than 10 points.",
+          "Automatically update points when a video is watched."
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the user has < 10 points, the watch button/action is disabled or blocked and an English message explains why.",
+        "On successful watch, the UI updates the viewer’s points balance and reflects the watch in watch history.",
+        "Errors from the backend (e.g., insufficient points) are displayed in a user-friendly English message."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Apply a clean, modern, mobile-friendly visual design with a coherent theme (colors, typography, spacing) and consistent components across pages; avoid using blue/purple as the primary brand palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Clean, modern, mobile-friendly design",
+          "The app should be responsive and work smoothly on both desktop and mobile browsers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "UI is responsive across common breakpoints (mobile, tablet, desktop).",
+        "Consistent card styling, spacing, and typography across Home, Upload, and Profile.",
+        "Primary theme does not use blue/purple as the dominant palette.",
+        "All user-facing text is English."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Generate and include minimal static brand assets for the app (logo + favicon) and render them in the app shell/navigation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a modern web app called SkillSwap."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
+        "The logo is visible in the navigation bar/app header and the favicon is set for the app."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must be a single Motoko actor; keep all Motoko logic in the main actor file.",
+    "Do not edit files under frontend/src/components/ui or other immutablePaths; compose existing UI components instead.",
+    "Third-party authentication via Google/Gmail is not supported; use Internet Identity for authentication while keeping user-facing copy in English.",
+    "No external databases; store users, videos, points, and watch history in canister stable storage."
+  ],
+  "nonGoals": [
+    "Comments/likes/following between users.",
+    "Real-time features (live updates via websockets).",
+    "External video hosting/CDN integration.",
+    "Admin moderation tools.",
+    "Payments or purchasing points with fiat/crypto."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Modern wordmark logo reading “SkillSwap” with a simple swap/loop motif (skillswap-logo.dim_512x512.png)",
+      "Minimal monochrome favicon icon with swap/loop motif (skillswap-favicon.dim_128x128.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "User-facing text must be English."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
